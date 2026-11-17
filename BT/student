@@ -1,0 +1,71 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract StudentData {
+
+    struct Student {
+        uint rollNo;
+        string name;
+        uint marks;
+    }
+
+    Student[] public students;
+
+    // Add student details
+    function addStudent(uint r, string memory n, uint m) public {
+        students.push(Student(r, n, m));
+    }
+
+    // Display student details
+    function getStudent(uint index)
+        public view returns (uint, string memory, uint) {
+        Student memory s = students[index];
+        return (s.rollNo, s.name, s.marks);
+    }
+
+    // Display total students
+    function getCount() public view returns (uint) {
+        return students.length;
+    }
+
+    // Fallback function
+    fallback() external payable {
+    }
+}
+
+Step 2: Deploy
+1. Click Deploy on the left sidebar.
+2. Select Environment: Remix VM.
+3. Select Contract: StudentData.
+4. Set Value to 0.
+5. Click Deploy.
+Step 3: Add student details
+Under Deployed Contracts, expand StudentData.
+
+Find addStudent and enter:
+Field	Value
+r	1
+n	Gauri
+m	90
+
+Click Transact.
+
+Step 4: Display student details
+Find getStudent.
+- Enter index: 0
+- Click Call.
+Expected output:
+1
+Gauri
+90
+
+
+Step 5: Check total students
+Find getCount.
+
+Click Call.
+
+Expected output:
+1
+
+
