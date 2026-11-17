@@ -1,0 +1,107 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract BankAccount {
+
+    uint public balance;
+
+    // Deposit money
+    function deposit() public payable {
+        balance += msg.value;
+    }
+
+    // Withdraw money
+    function withdraw(uint amount) public {
+        require(amount <= balance, "Insufficient balance");
+
+        balance -= amount;
+        payable(msg.sender).transfer(amount);
+    }
+
+    // Show balance
+    function showBalance() public view returns (uint) {
+        return balance;
+    }
+}
+
+
+Your contract is **already deployed successfully!** Now you need to test the three operations: Deposit, Withdraw, and Show Balance.
+
+I'll explain exactly what to enter and which buttons to click.
+
+## **Step 1: Deposit money**
+
+Operation 1 – Deposit
+
+In your first screenshot, find the `deposit` function.
+
+1. Scroll down in the Deploy panel until you see **Value**.
+2. Enter `1`.
+3. Select `ether` from the unit dropdown.
+4. Go back to the `deposit` function.
+5. Click **Transact** next to `deposit`.
+
+[RareSkills](https://images.openai.com/static-rsc-4/ADnG15nIF3CQXi_MEIDenPfs7VkJCPC6oHBbGHhrtvHohWHtMg8ATQ1cCiwPtzAuut4o7E7KkZOL-l_dBPZfDa_jcozY2u0YKvo46rxowM5LDA9FNiwARDX-p6ws8BY3siwQH56SLkjvXQDOiXGx7fEGNryMMh9Bj_NXxXwnvyQ?purpose=inline)
+
+[rareskills.io](https://www.rareskills.io/learn-solidity/payable-functions?utm_source=chatgpt.com)
+
+This deposits 1 ETH into your smart contract.
+
+## **Step 2: Check balance**
+
+Operation 2 – Show Balance
+
+1. Find the `balance` function.
+2. Click **Call** next to it.
+3. You should get:
+
+EXPECTED BALANCE
+
+# **1000000000000000000**
+
+Wei = 1 ETH
+
+You can also click `showBalance` → **Call**. Both should return the same balance.
+
+## **Step 3: Withdraw money**
+
+Operation 3 – Withdraw
+
+In the `withdraw (uint256)` function:
+
+1\. Enter this amount:
+
+```
+500000000000000000
+```
+
+2. Make sure the **Value** field is set to `0 Wei` for this transaction.
+3. Click **Transact** next to `withdraw`.
+
+This withdraws 0.5 ETH.
+
+**Important:** In your screenshot, you entered `50000000`. That is not 0.5 ETH. Use the full number above.
+
+## **Step 4: Check balance again**
+
+Click **Call** next to `balance`.
+
+EXPECTED FINAL BALANCE
+
+# **500000000000000000**
+
+Wei = 0.5 ETH
+
+## **Expected practical output**
+
+| Operation             | Amount  |
+| --------------------- | ------- |
+| Initial balance       | 0 ETH   |
+| Deposit               | 1 ETH   |
+| Balance after deposit | 1 ETH   |
+| Withdraw              | 0.5 ETH |
+| Final balance         | 0.5 ETH |
+
+**One important point:** You do not need to deploy the contract again. Your already-deployed contract is ready for testing.
+
+Try Step 1 first: set Value to `1 ether` and click `deposit` → `Transact`. Tell me what result you get.
